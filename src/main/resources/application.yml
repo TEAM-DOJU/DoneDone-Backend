@@ -21,3 +21,6 @@ spring:
     defer-datasource-initialization: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
     open-in-view: false
+
+jwt:
+  secret : donedone
