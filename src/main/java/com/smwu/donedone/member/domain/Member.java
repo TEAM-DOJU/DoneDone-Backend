@@ -1,6 +1,6 @@
 package com.smwu.donedone.member.domain;
 
-import com.smwu.donedone.config.processor.Authority;
+import com.smwu.donedone.auth.Authority;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

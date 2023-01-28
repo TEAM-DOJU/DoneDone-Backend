@@ -1,11 +1,9 @@
-package com.smwu.donedone.config.processor;
+package com.smwu.donedone.auth.security;
 
-import com.smwu.donedone.member.domain.Member;
 import java.util.Collection;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Getter

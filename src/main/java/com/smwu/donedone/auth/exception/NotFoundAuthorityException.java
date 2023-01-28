@@ -1,6 +1,6 @@
-package com.smwu.donedone.config.exception;
+package com.smwu.donedone.auth.exception;
 
-import com.smwu.donedone.exception.DoneDoneException;
+import com.smwu.donedone.common.exception.DoneDoneException;
 import org.springframework.http.HttpStatus;
 
 public class NotFoundAuthorityException extends DoneDoneException {

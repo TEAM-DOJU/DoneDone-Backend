@@ -1,17 +1,14 @@
-package com.smwu.donedone.config.processor;
+package com.smwu.donedone.auth.provider;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JwtProvider implements AuthenticationProvider {
+public class JwtProvider {
 
     @Value("${jwt.secret}")
     private String secret;
@@ -35,16 +32,5 @@ public class JwtProvider implements AuthenticationProvider {
         final Claims claims = Jwts.claims();
         claims.put("email", email);
         return claims;
-    }
-
-    @Override
-    public Authentication authenticate(final Authentication authentication) throws AuthenticationException {
-
-        return null;
-    }
-
-    @Override
-    public boolean supports(final Class<?> authentication) {
-        return false;
     }
 }

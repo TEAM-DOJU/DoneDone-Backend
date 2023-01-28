@@ -1,6 +1,6 @@
-package com.smwu.donedone.config.processor;
+package com.smwu.donedone.auth;
 
-import com.smwu.donedone.config.exception.NotFoundAuthorityException;
+import com.smwu.donedone.auth.exception.NotFoundAuthorityException;
 import java.util.Arrays;
 
 public enum Authority {

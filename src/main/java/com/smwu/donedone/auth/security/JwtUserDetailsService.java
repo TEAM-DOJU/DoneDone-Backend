@@ -1,4 +1,4 @@
-package com.smwu.donedone.config.processor;
+package com.smwu.donedone.auth.security;
 
 import com.smwu.donedone.member.domain.repository.MemberRepository;
 import org.springframework.security.core.userdetails.UserDetails;

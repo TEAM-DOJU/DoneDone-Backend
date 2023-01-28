@@ -1,7 +1,8 @@
-package com.smwu.donedone.config;
+package com.smwu.donedone.auth.config;
 
-import com.smwu.donedone.config.filter.JwtAuthenticationFilter;
-import com.smwu.donedone.config.processor.Authority;
+import com.smwu.donedone.auth.Authority;
+import com.smwu.donedone.auth.security.OAuth2UserService;
+import com.smwu.donedone.auth.provider.JwtProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,8 +10,6 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -19,21 +18,30 @@ import org.springframework.web.filter.CorsFilter;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private final JwtProvider jwtProvider;
+    private final OAuth2UserService oAuth2UserService;
+
+    public SecurityConfig(JwtProvider jwtProvider, final OAuth2UserService oAuth2UserService) {
+        this.jwtProvider = jwtProvider;
+        this.oAuth2UserService = oAuth2UserService;
+    }
+
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http.csrf().disable()
+    public void filterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable()
                 .formLogin().disable()
                 .httpBasic().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilter(corsFilter())
-                .addFilterBefore(jwtAuthenticationFilter(http.getSharedObject(AuthenticationManager.class)),
-                        UsernamePasswordAuthenticationFilter.class)
+//                .addFilterBefore(new JwtAuthenticationFilter(http.getSharedObject(AuthenticationManager.class), jwtProvider),
+//                        UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/api/**").hasRole(Authority.USER.name())
-                .anyRequest().permitAll()
-                .and()
-                .build();
+                .anyRequest().permitAll();
+
+        http.oauth2Login()
+                .userInfoEndpoint().userService(oAuth2UserService);
     }
 
 
@@ -50,15 +58,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter(AuthenticationManager authenticationManager) {
-
-        final JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter();
-        jwtAuthenticationFilter.setAuthenticationManager(authenticationManager);
-        return jwtAuthenticationFilter;
-    }
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 

@@ -1,4 +1,4 @@
-package com.smwu.donedone.exception;
+package com.smwu.donedone.common.exception;
 
 import org.springframework.http.HttpStatus;
 
