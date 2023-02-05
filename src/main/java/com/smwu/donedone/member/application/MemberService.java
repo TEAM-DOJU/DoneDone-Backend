@@ -19,7 +19,7 @@ public class MemberService {
     private final MemberInterestService memberInterestService;
     private final MemberRepository memberRepository;
 
-    public MemberResponse findMember(Long id){
+    public MemberResponse findMember(Long id) {
         final Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new NotFoundMemberException("해당 멤버를 찾을 수 없습니다."));
         final List<InterestDto> interests = Arrays.stream(member.getInterestIds().split(","))

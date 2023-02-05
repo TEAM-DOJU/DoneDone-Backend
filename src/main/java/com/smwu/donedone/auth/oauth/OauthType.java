@@ -13,7 +13,7 @@ public enum OauthType {
         this.oauthType = oauthType;
     }
 
-    public static OauthType of(final String oauthName){
+    public static OauthType of(final String oauthName) {
         return Arrays.stream(OauthType.values())
                 .filter(it -> it.oauthType.equals(oauthName))
                 .findFirst()

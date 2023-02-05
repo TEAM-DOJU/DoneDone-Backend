@@ -1,7 +1,6 @@
 package com.smwu.donedone.auth.security;
 
 import com.smwu.donedone.auth.oauth.OauthFactory;
-import com.smwu.donedone.auth.oauth.OauthUser;
 import com.smwu.donedone.member.domain.Member;
 import com.smwu.donedone.member.domain.repository.MemberRepository;
 import java.util.Map;
@@ -31,7 +30,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 .getUserNameAttributeName();
         Map<String, Object> attributes = oAuth2User.getAttributes();
 
-        if(!memberRepository.findByEmail(oAuth2User.getAttribute("email")).isPresent()){
+        if (!memberRepository.findByEmail(oAuth2User.getAttribute("email")).isPresent()) {
             memberRepository.save(new Member(oAuth2User.getAttribute("email")));
         }
 

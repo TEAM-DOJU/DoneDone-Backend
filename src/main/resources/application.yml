@@ -24,4 +24,4 @@ spring:
     open-in-view: false
 
 jwt:
-  secret : donedone
+  secret: donedone

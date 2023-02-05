@@ -2,7 +2,7 @@ package com.smwu.donedone.common.exception;
 
 import org.springframework.http.HttpStatus;
 
-public class DoneDoneException extends RuntimeException{
+public class DoneDoneException extends RuntimeException {
 
     private HttpStatus status;
 

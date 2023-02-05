@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OauthFactory {
     public OAuth2User createOauthUser(final String oauthName,
-                                      Map<String, Object> attributes){
+                                      Map<String, Object> attributes) {
         final OauthType oauthType = OauthType.of(oauthName);
 
         switch (oauthType) {
