@@ -43,8 +43,8 @@ public class SecurityConfig {
                 .antMatchers("/h2-console/**").permitAll()
                 .anyRequest().permitAll();
 
-        http.oauth2Login()
-                .userInfoEndpoint().userService(oAuth2UserService);
+//        http.oauth2Login()
+//                .userInfoEndpoint().userService(oAuth2UserService);
 
         return http.build();
     }
