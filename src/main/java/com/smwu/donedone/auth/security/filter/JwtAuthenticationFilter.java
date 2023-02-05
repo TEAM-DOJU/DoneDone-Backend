@@ -22,11 +22,4 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         this.jwtProvider = jwtProvider;
     }
 
-    @Override
-    protected void successfulAuthentication(final HttpServletRequest request,
-                                            final HttpServletResponse response,
-                                            final FilterChain chain,
-                                            final Authentication authentication)
-            throws IOException, ServletException {
-    }
 }

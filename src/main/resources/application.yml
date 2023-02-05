@@ -3,6 +3,7 @@ server:
 
 spring:
   profiles:
+    include: oauth
     active: local
 
   datasource:
