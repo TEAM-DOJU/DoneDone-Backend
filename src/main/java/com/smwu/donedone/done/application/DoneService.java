@@ -9,10 +9,12 @@ import com.smwu.donedone.done.domain.Category;
 import com.smwu.donedone.done.domain.Done;
 import com.smwu.donedone.done.domain.repository.CategoryRepository;
 import com.smwu.donedone.done.domain.repository.DoneRepository;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -43,4 +45,13 @@ public class DoneService {
                 .orElseThrow(() -> new NotFoundDoneException("해당 던을 찾을 수 없습니다 doneId = " + doneId));
         return DoneDto.of(done);
     }
+
+    public List<DoneDto> getDones(Integer year, Integer month, Integer day) {
+        final LocalDateTime startDay = LocalDateTime.of(year, month, day, 0, 0, 0);
+        final LocalDateTime endDay = LocalDateTime.of(year, month, day, 23,59,59);
+        return doneRepository.findByDateBetween(startDay, endDay).stream()
+                .map(DoneDto::of)
+                .collect(Collectors.toList());
+    }
+
 }

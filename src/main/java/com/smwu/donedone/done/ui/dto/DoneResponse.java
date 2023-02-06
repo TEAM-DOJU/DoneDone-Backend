@@ -1,7 +1,6 @@
 package com.smwu.donedone.done.ui.dto;
 
 import com.smwu.donedone.done.application.dto.DoneDto;
-import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +13,6 @@ public class DoneResponse {
 
     private Long id;
     private String title;
-    private LocalDateTime date;
     private String status;
     private String category;
 
@@ -22,7 +20,6 @@ public class DoneResponse {
         return new DoneResponse(
                 done.getId(),
                 done.getTitle(),
-                done.getDate(),
                 done.getStatus(),
                 done.getCategory());
     }

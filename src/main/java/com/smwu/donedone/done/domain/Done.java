@@ -26,7 +26,7 @@ public class Done {
     @OneToOne
     @JoinColumn(name = "id")
     private Category category;
-    private Status status = Status.EMPTY;
+    private Status status = Status.NOT_DONE;
 
     public Done(String title, Category category) {
         this.title = title;
