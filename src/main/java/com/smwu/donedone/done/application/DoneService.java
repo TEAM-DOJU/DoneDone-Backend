@@ -38,7 +38,7 @@ public class DoneService {
         final Category category = categoryRepository.findById(createDoneDto.getCategoryId())
                 .orElseThrow(() -> new NotFoundCategoryException(
                         "해당 카테고리를 찾을 수 없습니다 categoryId = " + createDoneDto.getCategoryId()));
-        final Done savedDone = doneRepository.save(new Done(createDoneDto.getTitle(), category));
+        final Done savedDone = doneRepository.save(new Done(createDoneDto.getTitle(), createDoneDto.getDate(), category));
         return DoneDto.of(savedDone);
     }
 

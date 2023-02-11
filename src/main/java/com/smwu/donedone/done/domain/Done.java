@@ -28,9 +28,9 @@ public class Done {
     private Category category;
     private Status status = Status.NOT_DONE;
 
-    public Done(String title, Category category) {
+    public Done(String title, LocalDateTime date, Category category) {
         this.title = title;
-        this.date = LocalDateTime.now();
+        this.date = date;
         this.category = category;
     }
 }
