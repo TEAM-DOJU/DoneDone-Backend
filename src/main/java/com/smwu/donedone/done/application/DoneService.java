@@ -3,13 +3,13 @@ package com.smwu.donedone.done.application;
 import com.smwu.donedone.done.application.dto.CalendarDto;
 import com.smwu.donedone.done.application.dto.CreateDoneDto;
 import com.smwu.donedone.done.application.dto.DoneDto;
+import com.smwu.donedone.done.application.dto.StatisticsDoneDto;
 import com.smwu.donedone.done.application.exception.NotFoundCategoryException;
 import com.smwu.donedone.done.application.exception.NotFoundDoneException;
 import com.smwu.donedone.done.domain.Category;
 import com.smwu.donedone.done.domain.Done;
 import com.smwu.donedone.done.domain.repository.CategoryRepository;
 import com.smwu.donedone.done.domain.repository.DoneRepository;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.temporal.TemporalAdjusters;
@@ -17,8 +17,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class DoneService {
 
@@ -53,5 +55,4 @@ public class DoneService {
                 .map(DoneDto::of)
                 .collect(Collectors.toList());
     }
-
 }
