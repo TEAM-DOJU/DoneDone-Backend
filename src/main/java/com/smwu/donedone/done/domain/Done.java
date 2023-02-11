@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +23,7 @@ public class Done {
     private String title;
     private LocalDateTime date;
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "category_id")
     private Category category;
     private Status status = Status.NOT_DONE;
 
@@ -32,5 +31,13 @@ public class Done {
         this.title = title;
         this.date = date;
         this.category = category;
+    }
+
+    public void changeStatus() {
+        if (this.status.equals(Status.DONE)) {
+            this.status = Status.NOT_DONE;
+            return;
+        }
+        this.status = Status.DONE;
     }
 }

@@ -7,6 +7,7 @@ import com.smwu.donedone.done.ui.dto.CalendarResponse;
 import com.smwu.donedone.done.ui.dto.CreateDoneRequest;
 import com.smwu.donedone.done.ui.dto.DailyResponse;
 import com.smwu.donedone.done.ui.dto.DoneResponse;
+import com.smwu.donedone.done.ui.dto.StatisticsResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import java.net.URI;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,6 +62,20 @@ public class DoneController {
                 .map(DoneResponse::of)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(DailyResponse.of(result));
+    }
+
+    @Operation(summary = "던 상태 변경", description = "")
+    @PutMapping("/done/{doneId}/change")
+    public ResponseEntity<DoneResponse> changeDoneStatus(@PathVariable Long doneId){
+        final DoneDto doneDto = doneService.changeStatus(doneId);
+        return ResponseEntity.ok(DoneResponse.of(doneDto));
+    }
+
+    @Operation(summary = "통계 정보 조회 API", description = "월단위로 카테고리별 done 의 갯수, 상태별 done의 갯수 및 달성비율을 반환한다.")
+    @GetMapping("/statistics")
+    public ResponseEntity<StatisticsResponse> getStatistics(@RequestParam(value = "year") final Integer year,
+                                                            @RequestParam(value = "month") final Integer month) {
+        return ResponseEntity.ok(doneService.getStatistics(year, month));
     }
 
 }

@@ -9,10 +9,10 @@ public enum Status {
     NOT_DONE,
     EMPTY;
 
-    public static Status of(final Status status){
+    public static Status of(final String statusName){
          return Arrays.stream(values())
-                .filter(it -> status.name().equals(it.name()))
+                .filter(it -> statusName.equals(it.name()))
                 .findFirst()
-                .orElseThrow(() -> new InvalidStatusException("지원하지 않는 상태입니다 Status = " + status.name()));
+                .orElseThrow(() -> new InvalidStatusException("지원하지 않는 상태입니다 Status = " + statusName));
     }
 }

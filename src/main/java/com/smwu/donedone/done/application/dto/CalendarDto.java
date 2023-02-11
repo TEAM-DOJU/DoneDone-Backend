@@ -17,11 +17,7 @@ public class CalendarDto {
 
     private List<Status> calendarStatuses;
 
-    public static CalendarDto of(final List<Done> monthDone) {
-        return new CalendarDto(
-                monthDone.stream()
-                .map(Done::getStatus)
-                .collect(Collectors.toList())
-        );
+    public static CalendarDto of(final List<Status> statuses) {
+        return new CalendarDto(statuses);
     }
 }

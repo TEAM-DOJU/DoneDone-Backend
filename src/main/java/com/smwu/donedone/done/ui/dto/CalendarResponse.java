@@ -14,12 +14,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CalendarResponse {
 
-    private List<String> calendarStatuses;
+    private List<String> calendar;
 
     public static CalendarResponse from(CalendarDto calendarDto) {
+
+
         return new CalendarResponse(
                 calendarDto.getCalendarStatuses().stream()
-                .map(Status::of)
                 .map(Enum::name)
                 .collect(Collectors.toList())
         );
