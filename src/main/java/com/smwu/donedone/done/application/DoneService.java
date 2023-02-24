@@ -47,7 +47,7 @@ public class DoneService {
                 .map(LocalDateTime::getDayOfMonth)
                 .collect(Collectors.toSet());
 
-        for (int i = 1; i < getLastDayInMonth(year, month); i++) {
+        for (int i = 1; i <= getLastDayInMonth(year, month); i++) {
             if (doneDayList.contains(i)) {
                 int targetDay = i;
                 final List<Status> DayOfDoneStatus = monthDone.stream()
