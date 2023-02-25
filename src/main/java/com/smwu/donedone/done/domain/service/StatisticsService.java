@@ -33,8 +33,10 @@ public class StatisticsService {
             statusCount.merge(done.getStatus().name(), 1, Integer::sum);
         }
 
-        final int ratio = statusCount.get(Status.NOT_DONE.name()) / statusCount.get(Status.DONE.name());
-
+        int ratio = 0;
+        if (statusCount.get(Status.   DONE.name()) != null){
+            ratio = statusCount.getOrDefault(Status.NOT_DONE.name(),0) / statusCount.getOrDefault(Status.DONE.name(), 1);
+        }
         return StatisticsResponse.of(categoryCount, statusCount, ratio);
     }
 }

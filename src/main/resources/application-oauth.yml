@@ -4,5 +4,23 @@
 #      client:
 #        registration:
 #          google:
-#            clientId: "382884320416-aj8b4t175490hiop3acm7569fldst9j0.apps.googleusercontent.com"
-#            clientSecret: "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"
+#            clientId: 382884320416-aj8b4t175490hiop3acm7569fldst9j0.apps.googleusercontent.com
+#            clientSecret: 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
+#          apple:
+#            auth:
+#              url: https://appleid.apple.com
+#            team.id: F7B353LPM3
+#            redirect.url:
+#            client:
+#              id: com.kimdee.DoneDone
+#            key:
+#              id: TUK366564L
+#              path :
+#            clientName: Apple
+#            clientAuthenticationMethod: post
+#      provider:
+#        apple:
+#          authorizationUri: https://appleid.apple.com/auth/authorize?response_mode=form_post&response_type=code+id_token
+#          tokenUri: https://appleid.apple.com/auth/token
+#          jwkSetUri: https://appleid.apple.com/auth/keys
+#          userNameAttribute: sub

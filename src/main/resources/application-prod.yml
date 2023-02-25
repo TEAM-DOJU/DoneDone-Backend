@@ -4,18 +4,11 @@ server:
 spring:
   profiles:
     include: oauth
-    active: local
+    active: prod
 
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:test;MODE=MYSQL
-    username: sa
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-      settings:
-        web-allow-others: true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://google/donedone-db?cloudSqlInstance=donedone-376207:asia-northeast3&socketFactory=com.google.cloud.sql.mysql.SocketFactory&user=root&password=1212&useSSL=false
 
   jpa:
     hibernate:

@@ -31,6 +31,7 @@ public class SecurityConfig {
         http.csrf().disable()
                 .formLogin().disable()
                 .httpBasic().disable()
+                .csrf().disable()
                 .headers().frameOptions().disable()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -40,7 +41,7 @@ public class SecurityConfig {
 //                        UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
 //                .antMatchers("/api/**").hasRole(Authority.USER.name())
-                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers( "/h2-console/**").permitAll()
                 .anyRequest().permitAll();
 
 //        http.oauth2Login()
