@@ -2,6 +2,7 @@ package com.smwu.donedone.auth.config;
 
 import com.smwu.donedone.auth.provider.JwtProvider;
 import com.smwu.donedone.auth.security.CustomOAuth2UserService;
+import com.smwu.donedone.auth.security.filter.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,7 +10,9 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.web.DefaultSecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -37,19 +40,18 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilter(corsFilter())
-//                .addFilterBefore(new JwtAuthenticationFilter(http.getSharedObject(AuthenticationManager.class), jwtProvider),
-//                        UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtAuthenticationFilter(http.getSharedObject(AuthenticationManager.class), jwtProvider),
+                        UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
 //                .antMatchers("/api/**").hasRole(Authority.USER.name())
                 .antMatchers( "/h2-console/**").permitAll()
                 .anyRequest().permitAll();
 
-//        http.oauth2Login()
-//                .userInfoEndpoint().userService(oAuth2UserService);
+        http.oauth2Login()
+                .userInfoEndpoint().userService(oAuth2UserService);
 
         return http.build();
     }
-
 
     @Bean
     public CorsFilter corsFilter() {

@@ -5,6 +5,7 @@ import com.smwu.donedone.member.domain.Member;
 import com.smwu.donedone.member.domain.dto.InterestDto;
 import com.smwu.donedone.member.domain.repository.MemberRepository;
 import com.smwu.donedone.member.domain.service.MemberInterestService;
+import com.smwu.donedone.member.ui.dto.LoginRequestDto;
 import com.smwu.donedone.member.ui.dto.MemberResponse;
 import java.util.Arrays;
 import java.util.List;
@@ -30,4 +31,11 @@ public class MemberService {
                 .collect(Collectors.toList());
         return MemberResponse.of(member, interests);
     }
+
+//    public LoginResponse login(final LoginRequestDto loginRequestDto) {
+//        final String accessToken = loginRequestDto.getAccessToken();
+//        final String idToken = loginRequestDto.getIdToken();
+//
+//
+//    }
 }
