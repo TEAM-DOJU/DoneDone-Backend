@@ -25,10 +25,13 @@ public class MemberService {
     public MemberResponse findMember(Long id) {
         final Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new NotFoundMemberException("해당 멤버를 찾을 수 없습니다."));
-        final List<InterestDto> interests = Arrays.stream(member.getInterestIds().split(","))
-                .mapToLong(Long::parseLong)
-                .mapToObj(memberInterestService::getInterest)
-                .collect(Collectors.toList());
+        List<InterestDto> interests = null;
+        if(member.getInterestIds() != null){
+            interests = Arrays.stream(member.getInterestIds().split(","))
+                    .mapToLong(Long::parseLong)
+                    .mapToObj(memberInterestService::getInterest)
+                    .collect(Collectors.toList());
+        }
         return MemberResponse.of(member, interests);
     }
 

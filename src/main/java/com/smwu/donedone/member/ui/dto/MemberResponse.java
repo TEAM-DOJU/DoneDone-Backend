@@ -5,8 +5,10 @@ import com.smwu.donedone.member.domain.dto.InterestDto;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberResponse {
@@ -16,9 +18,12 @@ public class MemberResponse {
     private List<String> interests;
 
     public static MemberResponse of(Member member, List<InterestDto> interestDtos) {
-        final List<String> interests = interestDtos.stream()
-                .map(InterestDto::getValue)
-                .collect(Collectors.toList());
+        List<String> interests = null;
+        if (interestDtos != null) {
+            interests = interestDtos.stream()
+                    .map(InterestDto::getValue)
+                    .collect(Collectors.toList());
+        }
         return new MemberResponse(member.getEmail(), member.getName(), interests);
     }
 }
