@@ -2,11 +2,19 @@ package com.smwu.donedone.auth;
 
 import com.smwu.donedone.auth.exception.NotFoundAuthorityException;
 import java.util.Arrays;
+import lombok.Getter;
 
+@Getter
 public enum Authority {
 
-    USER,
-    ADMIN;
+    USER("ROLE_USER"),
+    ADMIN("ROLE_ADMIN");
+
+    private final String code;
+
+    Authority(String code) {
+        this.code = code;
+    }
 
     public Authority getAuthority(final String role) {
         return Arrays.stream(Authority.values())
